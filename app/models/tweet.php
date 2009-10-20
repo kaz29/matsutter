@@ -5,6 +5,7 @@ App::import('Core', 'Xml');
 class Tweet extends AppModel {
   const API_URL = 'http://%s:%s@twitter.com' ;
   const API_PATH_UPDATE = '/statuses/update.xml';
+  const API_PATH_STATUS = '/statuses/%s.xml';
 
   public $useTable = false;
   
@@ -33,5 +34,23 @@ class Tweet extends AppModel {
 	  }
 	  
 		return false;
+  }
+  
+	function find($conditions = null, $fields = array(), $order = null, $recursive = null)
+	{
+	  $url = sprintf( self::API_URL, Configure::read('Tweet.username'), Configure::read('Tweet.password') ) ;
+	  $url .= sprintf( self::API_PATH_STATUS, $conditions ) ;
+		$this->connection = new HttpSocket();
+		
+		$result = $this->connection->get($url) ;
+		if ( !$result ) 
+		  return false ;
+
+	  if ( $this->connection->response['status']['code'] != '200' ) {
+      return false ;
+	  }
+    
+    $Xml = new Xml($result);
+		return $Xml->toArray();
   }
 }

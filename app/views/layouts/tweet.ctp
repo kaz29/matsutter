@@ -34,6 +34,7 @@
 		echo $html->meta('icon');
 
 		echo $html->css('cake.generic');
+		echo $html->css('tweets');
 
 		echo $scripts_for_layout;
 	?>

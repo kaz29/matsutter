@@ -7,6 +7,13 @@ class TweetsController extends AppController
     
   function index()
   {
+    $result = $this->Tweet->find('friends_timeline') ;
+    if ( !$result ) {
+      $this->Session->setFlash(__('Could not read tweets.', true));
+      return ;
+    }
+
+    $this->set( 'statuses', $result['Statuses']['Status'] ) ;
   }
   
   function add()
