@@ -1,0 +1,30 @@
+div.tweets{
+  width: 700px;
+	padding:10px;
+}
+
+div#timeline{
+	clear:both;
+	margin-top:-1px;
+//	border-top:1px solid #666666;
+	padding:10px;
+}
+
+table.statuslist{
+	border-collapse: collapse;
+	border: none;
+	border-right: none;
+	margin:10px 0;
+	width:700px;
+}
+table.statuslist tr td{
+	border-right: none;
+	border-bottom:1px solid #ccc;
+	text-align: left; 
+	margin:10px 0;
+}
+table.statuslist tr td.friendicon{
+	width:50px;
+	border-right: none;
+	border-bottom:1px solid #ccc;
+}
