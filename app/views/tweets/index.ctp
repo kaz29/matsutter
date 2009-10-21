@@ -6,6 +6,7 @@
 </div>
 
 <div id="timeline">
+<div class="timeline_title">ホーム</div>
 <table class="statuslist">
 <?php 
 if ( !empty($statuses) ):

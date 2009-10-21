@@ -28,3 +28,9 @@ table.statuslist tr td.friendicon{
 	border-right: none;
 	border-bottom:1px solid #ccc;
 }
+
+div.timeline_title{
+	border-bottom:1px solid #ccc;
+	width:700px;
+	margin:10px 0;
+}
