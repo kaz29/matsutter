@@ -33,3 +33,7 @@ if ( !empty($statuses) ):
 <?php endif; ?>
 </table>
 </div>
+<div class="pager">
+<?php echo $paginator->prev('<< '.__('prev', true), array('rel' => 'prev', 'class' => 'prev'));?>&nbsp;
+<?php echo $paginator->next(__('next', true).' >>', array('rel' => 'next', 'class' => 'next'));?>&nbsp;
+</div>

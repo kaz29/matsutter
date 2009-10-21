@@ -53,4 +53,32 @@ class Tweet extends AppModel {
     $Xml = new Xml($result);
 		return $Xml->toArray();
   }
+  
+  public function paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra)
+  {
+	  $url = sprintf( self::API_URL, Configure::read('Tweet.username'), Configure::read('Tweet.password') ) ;
+	  $url .= sprintf( self::API_PATH_STATUS, $conditions[1] ) ;
+
+		$this->connection = new HttpSocket();
+    $query = array(
+              'page' => $page,
+              'rpp' => $limit,
+             );
+
+    $result = $this->connection->get($url, $query);
+		if ( !$result ) 
+		  return false ;
+
+	  if ( $this->connection->response['status']['code'] != '200' ) {
+      return false ;
+	  }
+    
+    $Xml = new Xml($result);
+		return $Xml->toArray();
+  }
+
+  function paginateCount($conditions, $recursive, $extra)
+  {
+    return PHP_INT_MAX;
+  }
 }

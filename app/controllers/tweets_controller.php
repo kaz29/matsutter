@@ -3,17 +3,17 @@ class TweetsController extends AppController
 {
   var $uses = array('Tweet') ;
   var $layout = "tweet" ;
-  var $helpers = array('Time') ;
+  var $helpers = array('Time', 'Paginator') ;
     
   function index()
   {
-    $result = $this->Tweet->find('friends_timeline') ;
+    $result = $this->paginate($this->Tweet, 'friends_timeline') ;
     if ( !$result ) {
       $this->Session->setFlash(__('Could not read tweets.', true));
       return ;
     }
 
-    $this->set( 'statuses', $result['Statuses']['Status'] ) ;
+    $this->set( 'statuses', Set::extract('Statuses.Status', $result) ) ;
   }
   
   function add()
