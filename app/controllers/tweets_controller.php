@@ -13,7 +13,7 @@ class TweetsController extends AppController
       return ;
     }
 
-    $this->set( 'statuses', $result['Statuses']['Status'] ) ;
+    $this->set( 'statuses', Set::extract('Statuses.Status', $result) ) ;
   }
   
   function add()
