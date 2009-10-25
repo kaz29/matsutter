@@ -4,6 +4,12 @@ class TweetsController extends AppController
   var $uses = array('Tweet') ;
   var $layout = "tweet" ;
   var $helpers = array('Time', 'Paginator') ;
+  
+  function __construct() 
+  {
+    parent::__construct() ;
+    config('tweets') ;
+  }
     
   function index()
   {
