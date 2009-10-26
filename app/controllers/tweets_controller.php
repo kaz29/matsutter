@@ -13,7 +13,7 @@ class TweetsController extends AppController
     
   function index()
   {
-    $result = $this->paginate($this->Tweet, 'friends_timeline') ;
+    $result = $this->paginate('Tweet', 'friends_timeline') ;
     if ( !$result ) {
       $this->Session->setFlash(__('Could not read tweets.', true));
       return ;
