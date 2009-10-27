@@ -3,7 +3,7 @@ App::import('Core', 'HttpSocket');
 App::import('Core', 'Xml');
 
 class Tweet extends AppModel {
-  public $useTable = false;
+  var $useTable = false;
   
 	var $validate = array(
 		'status' => array(
