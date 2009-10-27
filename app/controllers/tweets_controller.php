@@ -15,7 +15,7 @@ class TweetsController extends AppController
   {
   }
   
-  function add()　{
+  function add() {
     if ( !empty($this->data) ) {
 			$this->Tweet->set($this->data);
   	  if ( $this->Tweet->validates() ) {
