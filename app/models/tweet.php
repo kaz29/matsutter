@@ -32,9 +32,8 @@ class Tweet extends AppModel {
 		$result = $this->connection->post($url, $this->data['Tweet']);
     $Xml = new Xml($result);
 	  $result = $Xml->toArray();
-		if (isset($result['Status']['id']) && is_numeric($result['Status']['id'])) {
+		if (isset($result['Status']['id']) && is_numeric($result['Status']['id']))
 			return true;
-	  }
 	  
 		return false;
   }
