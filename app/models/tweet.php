@@ -32,8 +32,8 @@ class Tweet extends AppModel
 	  if ( !$url = $this->make_url('update') ) 
 	    return false ;
 
-		$this->connection = new HttpSocket();
-		$result = $this->connection->post($url, $this->data['Tweet']);
+		$connection = new HttpSocket();
+		$result = $connection->post($url, $this->data['Tweet']);
 		
     $Xml = new Xml($result);
 	  $result = $Xml->toArray();
