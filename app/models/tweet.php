@@ -2,8 +2,9 @@
 App::import('Core', 'HttpSocket');
 App::import('Core', 'Xml');
 
-class Tweet extends AppModel {
-  public $useTable = false;
+class Tweet extends AppModel
+{
+  var $useTable = false;
   
 	var $validate = array(
 		'status' => array(
@@ -11,7 +12,8 @@ class Tweet extends AppModel {
 		)
   ) ;
   
-  function make_url( $type, $p1 = null ) {
+  function make_url( $type, $p1 = null )
+  {
 	  $url = sprintf( Configure::read('Tweet.url'), Configure::read('Tweet.username'), Configure::read('Tweet.password') ) ;
 	  $fmt = Configure::read("Tweet.path.{$type}") ;
 	  if ( !$fmt ) 
@@ -22,14 +24,17 @@ class Tweet extends AppModel {
 	  return $url ;
   }
   
-	function save($data = null, $validate = true, $fieldList = array()) {	  
+	function save($data = null, $validate = true, $fieldList = array())
+	{	  
 	  if ( is_null($this->data) ) 
 	    return false ;
+	    
 	  if ( !$url = $this->make_url('update') ) 
 	    return false ;
 
-		$this->connection = new HttpSocket();
-		$result = $this->connection->post($url, $this->data['Tweet']);
+		$connection = new HttpSocket();
+		$result = $connection->post($url, $this->data['Tweet']);
+		
     $Xml = new Xml($result);
 	  $result = $Xml->toArray();
 		if (isset($result['Status']['id']) && is_numeric($result['Status']['id']))
@@ -38,16 +43,17 @@ class Tweet extends AppModel {
 		return false;
   }
   
-	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
+	function find($conditions = null, $fields = array(), $order = null, $recursive = null)
+	{
 	  if ( !$url = $this->make_url('timeline', $conditions) ) 
 	    return false ;
 
-		$this->connection = new HttpSocket();
-		$result = $this->connection->get($url) ;
+		$connection = new HttpSocket();
+		$result = $connection->get($url) ;
 		if ( !$result ) 
 		  return false ;
 
-	  if ( $this->connection->response['status']['code'] != '200' )
+	  if ( $connection->response['status']['code'] != '200' )
       return false ;
     
     $Xml = new Xml($result);
