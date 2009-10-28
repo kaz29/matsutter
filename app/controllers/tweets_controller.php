@@ -13,7 +13,13 @@ class TweetsController extends AppController
     
   function index()
   {
-    $result = $this->paginate('Tweet', 'friends_timeline') ;
+    $type = Set::extract('named.type', $this->params) ;
+    if ( !$type ) 
+      $type = 'friends_timeline' ;
+
+    $this->set( 'type', $type ) ;
+    
+    $result = $this->paginate('Tweet', $type) ;
     if ( !$result ) {
       $this->Session->setFlash(__('Could not read tweets.', true));
       return ;

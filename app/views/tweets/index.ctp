@@ -5,8 +5,16 @@
 <?php echo $form->end('つぶやく');?>
 </div>
 
+<div class="actions">
+<ul>
+<li><?php echo $html->link('friends timeline', array('type' => 'friends_timeline')); ?></li>
+<li><?php echo $html->link('user timeline', array('type' => 'user_timeline')); ?></li>
+<li><?php echo $html->link('public timeline', array('type' => 'public_timeline')); ?></li>
+</ul>
+</div>
+
 <div id="timeline">
-<div class="timeline_title">ホーム</div>
+<div class="timeline_title"><?php echo $type; ?></div>
 <table class="statuslist">
 <?php 
 if ( !empty($statuses) ):
