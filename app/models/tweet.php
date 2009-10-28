@@ -60,21 +60,22 @@ class Tweet extends AppModel
 		return $Xml->toArray();
   }
   
-  function paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra) {
+  function paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra)
+  {
 	  if ( !$url = $this->make_url('timeline', $conditions[1]) ) 
 	    return false ;
 
-		$this->connection = new HttpSocket();
+		$connection = new HttpSocket();
     $query = array(
               'page' => $page,
               'rpp' => $limit,
              );
 
-    $result = $this->connection->get($url, $query);
+    $result = $connection->get($url, $query);
 		if ( !$result ) 
 		  return false ;
 
-	  if ( $this->connection->response['status']['code'] != '200' )
+	  if ( $connection->response['status']['code'] != '200' )
       return false ;
     
     $Xml = new Xml($result);
