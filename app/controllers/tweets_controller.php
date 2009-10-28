@@ -22,7 +22,8 @@ class TweetsController extends AppController
     $this->set( 'statuses', Set::extract('Statuses.Status', $result) ) ;
   }
   
-  function add() {
+  function add()
+  {
     if ( !empty($this->data) ) {
 			$this->Tweet->set($this->data);
   	  if ( $this->Tweet->validates() ) {
