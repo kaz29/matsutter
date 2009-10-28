@@ -43,16 +43,17 @@ class Tweet extends AppModel
 		return false;
   }
   
-	function find($conditions = null, $fields = array(), $order = null, $recursive = null) {
+	function find($conditions = null, $fields = array(), $order = null, $recursive = null)
+	{
 	  if ( !$url = $this->make_url('timeline', $conditions) ) 
 	    return false ;
 
-		$this->connection = new HttpSocket();
-		$result = $this->connection->get($url) ;
+		$connection = new HttpSocket();
+		$result = $connection->get($url) ;
 		if ( !$result ) 
 		  return false ;
 
-	  if ( $this->connection->response['status']['code'] != '200' )
+	  if ( $connection->response['status']['code'] != '200' )
       return false ;
     
     $Xml = new Xml($result);
