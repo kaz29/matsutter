@@ -54,7 +54,7 @@ class Tweet extends AppModel {
 		return $Xml->toArray();
   }
   
-  public function paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra) {
+  function paginate($conditions, $fields, $order, $limit, $page, $recursive, $extra) {
 	  if ( !$url = $this->make_url('timeline', $conditions[1]) ) 
 	    return false ;
 
